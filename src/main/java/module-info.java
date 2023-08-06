@@ -5,4 +5,6 @@ module me.naffah.partyrentals {
 
     opens me.naffah.partyrentals to javafx.fxml;
     exports me.naffah.partyrentals;
+    exports me.naffah.partyrentals.controllers;
+    opens me.naffah.partyrentals.controllers to javafx.fxml;
 }
