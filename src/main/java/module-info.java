@@ -1,6 +1,7 @@
 module me.naffah.partyrentals {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens me.naffah.partyrentals to javafx.fxml;
