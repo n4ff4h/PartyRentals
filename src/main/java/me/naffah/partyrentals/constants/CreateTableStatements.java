@@ -2,8 +2,8 @@ package me.naffah.partyrentals.constants;
 
 import java.util.HashMap;
 
-public class CreateTableQueries {
-    public static HashMap<String, String> queries = new HashMap<>() {{
+public class CreateTableStatements {
+    public static HashMap<String, String> statements = new HashMap<>() {{
         put("employees", "CREATE TABLE IF NOT EXISTS employees " +
                 "(id INTEGER PRIMARY KEY NOT NULL, " +
                 "fullName VARCHAR(70) NOT NULL, " +

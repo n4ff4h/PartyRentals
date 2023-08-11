@@ -1,6 +1,6 @@
 package me.naffah.partyrentals.services;
 
-import me.naffah.partyrentals.constants.CreateTableQueries;
+import me.naffah.partyrentals.constants.CreateTableStatements;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -45,12 +45,12 @@ public class DBService {
 
     public void createTables(Connection conn) {
         // Table creation queries
-        HashMap<String, String> queries = CreateTableQueries.queries;
+        HashMap<String, String> statements = CreateTableStatements.statements;
 
         // Execute each statement to create a table if not already created
-        for (Map.Entry<String, String> entry : queries.entrySet()) {
+        for (Map.Entry<String, String> entry : statements.entrySet()) {
             String tableName = entry.getKey();
-            String query = entry.getValue();
+            String stmts = entry.getValue();
 
             try {
                 // Check if table already exists
@@ -62,7 +62,7 @@ public class DBService {
                     System.out.println("Table with the name '" + tableName + "' exists!");
                 } else {
                     // Table does not exist - create table
-                    PreparedStatement preparedStatement = conn.prepareStatement(query);
+                    PreparedStatement preparedStatement = conn.prepareStatement(stmts);
                     preparedStatement.execute();
                     System.out.println("Table '" + tableName + "' successfully created!");
                 }
