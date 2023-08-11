@@ -10,8 +10,8 @@
     </padding>
    <children>
       <Label text="Login" />
-      <TextField promptText="Username" />
-      <PasswordField promptText="Password" />
-      <Button onAction="#onLoginButtonClick" mnemonicParsing="false" text="Login" />
+      <TextField fx:id="usernameField" promptText="Username" />
+      <PasswordField fx:id="passwordField" promptText="Password" />
+      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClick" text="Login" />
    </children>
 </VBox>

@@ -25,7 +25,7 @@ public class DBService {
         return conn;
     }
 
-    private void logConnectionInfo(Connection conn) {
+    public void logConnectionInfo(Connection conn) {
         if (conn != null) {
             try {
                 DatabaseMetaData meta = conn.getMetaData();
@@ -38,7 +38,7 @@ public class DBService {
         }
     }
 
-    private void logException(String message, Exception e) {
+    public static void logException(String message, Exception e) {
         System.err.println(message);
         e.printStackTrace();
     }
@@ -62,8 +62,8 @@ public class DBService {
                     System.out.println("Table with the name '" + tableName + "' exists!");
                 } else {
                     // Table does not exist - create table
-                    PreparedStatement preparedStatement = conn.prepareStatement(stmts);
-                    preparedStatement.execute();
+                    PreparedStatement pstmt = conn.prepareStatement(stmts);
+                    pstmt.execute();
                     System.out.println("Table '" + tableName + "' successfully created!");
                 }
 
