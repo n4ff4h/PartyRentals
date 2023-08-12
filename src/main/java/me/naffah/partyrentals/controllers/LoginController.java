@@ -38,9 +38,9 @@ public class LoginController {
             a.show();
 
             a.setOnCloseRequest(e -> {
-                // Set a new scene for dashboard view and load into a new stage
+                // Create a stage for dashboard view and mount its scene onto it
                 Stage primaryStage = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(PartyRentalsApp.class.getResource("views/dashboard.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(PartyRentalsApp.class.getResource("views/dashboard-view.fxml"));
 
                 Scene scene = null;
                 try {
@@ -52,7 +52,7 @@ public class LoginController {
                 primaryStage.setScene(scene);
                 primaryStage.show();
 
-                // get a handle to the auth stage and close
+                // get a handle to the auth view stage and close
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.close();
             });

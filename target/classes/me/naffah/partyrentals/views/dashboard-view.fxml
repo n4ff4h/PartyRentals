@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="dashboardBorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.naffah.partyrentals.controllers.DashboardController">
+    <left>
+        <VBox spacing="5">
+            <Button maxWidth="1.7976931348623157E308" text="Home" userData="/me/naffah/partyrentals/views/dashboard/home-view.fxml" onAction="#handleShowView" />
+            <Button maxWidth="1.7976931348623157E308" text="Rentals" userData="/me/naffah/partyrentals/views/dashboard/rentals-view.fxml" onAction="#handleShowView" />
+            <Button maxWidth="1.7976931348623157E308" text="Products" userData="/sample/view_3.fxml" onAction="#handleShowView" />
+            <Button maxWidth="1.7976931348623157E308" text="Customers" userData="/sample/view_3.fxml" onAction="#handleShowView" />
+        </VBox>
+    </left>
+    <center>
+        <fx:include source="dashboard/home-view.fxml" />
+    </center>
+</BorderPane>
