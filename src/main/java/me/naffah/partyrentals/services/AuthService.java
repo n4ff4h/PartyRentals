@@ -16,7 +16,7 @@ public class AuthService {
             DBService dbService = new DBService();
             Connection conn = dbService.connect();
 
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM employees WHERE username = '" + username + "' AND password = '" + password + "'");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'");
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {

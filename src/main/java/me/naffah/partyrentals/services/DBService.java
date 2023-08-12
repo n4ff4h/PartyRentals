@@ -68,8 +68,8 @@ public class DBService {
                     System.out.println("Table '" + tableName + "' successfully created!");
 
                     // Create admin user for employees table
-                    if (Objects.equals(tableName, "employees")) {
-                        stmt.execute("INSERT INTO employees (fullName, username, address, phone, password) VALUES ('Administrator', 'admin', 'None', 'None', 'admin')");
+                    if (Objects.equals(tableName, "users")) {
+                        stmt.execute("INSERT INTO users (fullName, username, password) VALUES ('Administrator', 'admin', 'admin')");
                     }
                 }
 
