@@ -5,8 +5,14 @@ import me.naffah.partyrentals.constants.CreateTableStatements;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class DBService {
+
+    public static void logException(String message, Exception e) {
+        System.err.println(message);
+        e.printStackTrace();
+    }
 
     public Connection connect() {
         Connection conn = null;
@@ -38,11 +44,6 @@ public class DBService {
         }
     }
 
-    public static void logException(String message, Exception e) {
-        System.err.println(message);
-        e.printStackTrace();
-    }
-
     public void createTables(Connection conn) {
         // Table creation queries
         HashMap<String, String> statements = CreateTableStatements.statements;
@@ -50,7 +51,7 @@ public class DBService {
         // Execute each statement to create a table if not already created
         for (Map.Entry<String, String> entry : statements.entrySet()) {
             String tableName = entry.getKey();
-            String stmts = entry.getValue();
+            String tableCreationStatements = entry.getValue();
 
             try {
                 // Check if table already exists
@@ -62,9 +63,14 @@ public class DBService {
                     System.out.println("Table with the name '" + tableName + "' exists!");
                 } else {
                     // Table does not exist - create table
-                    PreparedStatement pstmt = conn.prepareStatement(stmts);
-                    pstmt.execute();
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(tableCreationStatements);
                     System.out.println("Table '" + tableName + "' successfully created!");
+
+                    // Create admin user for employees table
+                    if (Objects.equals(tableName, "employees")) {
+                        stmt.execute("INSERT INTO employees (fullName, username, address, phone, password) VALUES ('Administrator', 'admin', 'None', 'None', 'admin')");
+                    }
                 }
 
 
