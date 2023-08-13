@@ -9,7 +9,7 @@
             <Button maxWidth="1.7976931348623157E308" text="Home" userData="/me/naffah/partyrentals/views/dashboard/home-view.fxml" onAction="#handleShowView" />
             <Button maxWidth="1.7976931348623157E308" text="Rentals" userData="/me/naffah/partyrentals/views/dashboard/rentals-view.fxml" onAction="#handleShowView" />
             <Button maxWidth="1.7976931348623157E308" text="Products" userData="/sample/view_3.fxml" onAction="#handleShowView" />
-            <Button maxWidth="1.7976931348623157E308" text="Categories" userData="/sample/view_3.fxml" onAction="#handleShowView" />
+            <Button maxWidth="1.7976931348623157E308" text="Categories" userData="/me/naffah/partyrentals/views/dashboard/categories-view.fxml" onAction="#handleShowView" />
             <Button maxWidth="1.7976931348623157E308" text="Customers" userData="/sample/view_3.fxml" onAction="#handleShowView" />
         </VBox>
     </left>

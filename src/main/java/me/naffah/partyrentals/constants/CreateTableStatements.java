@@ -30,7 +30,9 @@ public class CreateTableStatements {
                 "name VARCHAR(70) NOT NULL, " +
                 "description TEXT, " +
                 "price REAL NOT NULL, " +
+                "category_id INTEGER, " +
                 "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-                "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+                "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE SET NULL)");
     }};
 }
