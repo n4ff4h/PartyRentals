@@ -23,7 +23,7 @@
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding></Button>
-            <Button maxWidth="1.7976931348623157E308" onAction="#handleShowView" text="Customers" userData="/sample/view_3.fxml">
+            <Button maxWidth="1.7976931348623157E308" onAction="#handleShowView" text="Customers" userData="/me/naffah/partyrentals/views/dashboard/customers-view.fxml">
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding></Button>
