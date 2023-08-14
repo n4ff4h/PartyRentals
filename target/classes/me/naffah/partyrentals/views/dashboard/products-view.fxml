@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.naffah.partyrentals.controllers.dashboard.CategoriesController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.naffah.partyrentals.controllers.dashboard.ProductsController">
    <children>
       <VBox fx:id="parentVBox" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
          <children>
@@ -97,8 +97,8 @@
                 <TableColumn prefWidth="75.0" text="ID" />
                 <TableColumn prefWidth="132.0" text="NAME" />
                   <TableColumn prefWidth="144.0" text="SKU" />
-                  <TableColumn prefWidth="75.0" text="Price" />
-                  <TableColumn prefWidth="75.0" text="Category" />
+                  <TableColumn prefWidth="75.0" text="PRICE" />
+                  <TableColumn prefWidth="75.0" text="CATEGORY" />
                   <TableColumn prefWidth="126.0" text="CREATE DATE" />
                   <TableColumn prefWidth="122.0" text="MODIFIED DATE" />
               </columns>
