@@ -6,7 +6,7 @@
 
 <BorderPane fx:id="dashboardBorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.naffah.partyrentals.controllers.DashboardController">
     <left>
-        <VBox prefWidth="150.0" spacing="5" style="-fx-border-style: hidden solid hidden hidden; -fx-border-color: grey;">
+        <VBox prefWidth="200.0" spacing="5" style="-fx-border-style: hidden solid hidden hidden; -fx-border-color: CDCDCD;">
             <Button maxWidth="1.7976931348623157E308" onAction="#handleShowView" text="Home" userData="/me/naffah/partyrentals/views/dashboard/home-view.fxml">
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -27,6 +27,9 @@
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding></Button>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
         </VBox>
     </left>
     <center>
