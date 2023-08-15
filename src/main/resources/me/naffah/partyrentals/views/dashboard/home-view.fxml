@@ -147,14 +147,13 @@
             <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="75.0" text="CUSTOMER ID" />
-                  <TableColumn prefWidth="75.0" text="CUSTOMER NAME" />
+                <TableColumn prefWidth="75.0" text="CUSTOMER" />
+                  <TableColumn prefWidth="75.0" text="PAYMENT METHOD" />
+                  <TableColumn prefWidth="75.0" text="PAID AMOUNT" />
                   <TableColumn prefWidth="75.0" text="START DATE" />
                   <TableColumn prefWidth="75.0" text="END DATE" />
-                  <TableColumn prefWidth="75.0" text="PAID AMOUNT" />
+                  <TableColumn prefWidth="75.0" text="RETURNED DATE" />
                   <TableColumn prefWidth="75.0" text="STATUS" />
-                  <TableColumn prefWidth="75.0" text="ITEMS" />
-                  <TableColumn prefWidth="75.0" text="RETURN DATE" />
                   <TableColumn prefWidth="75.0" text="ACTION" />
               </columns>
                <VBox.margin>
