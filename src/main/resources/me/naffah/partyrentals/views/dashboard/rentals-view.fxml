@@ -67,6 +67,7 @@
                       <TableColumn prefWidth="75.0" text="ID" />
                       <TableColumn prefWidth="75.0" text="NAME" />
                         <TableColumn prefWidth="75.0" text="SKU" />
+                        <TableColumn prefWidth="75.0" text="AMOUNT" />
                         <TableColumn prefWidth="75.0" text="PRICE" />
                         <TableColumn prefWidth="75.0" text="CATEGORY" />
                     </columns>
@@ -80,7 +81,7 @@
                   <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
                       <Button mnemonicParsing="false" text="Add to Cart" />
-                        <TextField promptText="Amount" />
+                        <TextField promptText="Item amount" />
                     </buttons>
                      <VBox.margin>
                         <Insets bottom="24.0" left="10.0" right="10.0" />
