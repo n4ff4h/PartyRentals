@@ -67,7 +67,7 @@
                       <TableColumn prefWidth="75.0" text="ID" />
                       <TableColumn prefWidth="75.0" text="NAME" />
                         <TableColumn prefWidth="75.0" text="SKU" />
-                        <TableColumn prefWidth="75.0" text="AMOUNT" />
+                        <TableColumn prefWidth="75.0" text="QTY" />
                         <TableColumn prefWidth="75.0" text="PRICE" />
                         <TableColumn prefWidth="75.0" text="CATEGORY" />
                     </columns>
