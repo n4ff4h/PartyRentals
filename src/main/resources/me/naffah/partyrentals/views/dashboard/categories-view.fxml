@@ -35,7 +35,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Name" />
-                        <TextField />
+                        <TextField fx:id="nameField" />
                      </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -43,7 +43,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
                         <Label text="Rental Rate" />
-                        <TextField />
+                        <TextField fx:id="rentalRateField" />
                      </children>
                   </VBox>
                </children>
@@ -53,7 +53,7 @@
             </GridPane>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Add" />
+                <Button mnemonicParsing="false" text="Add" onAction="#onAddButtonClick" />
                   <Button mnemonicParsing="false" text="Update" />
                   <Button mnemonicParsing="false" text="Delete" />
               </buttons>

@@ -28,7 +28,9 @@ public class CreateTableStatements {
         put("products", "CREATE TABLE IF NOT EXISTS products " +
                 "(id INTEGER PRIMARY KEY NOT NULL, " +
                 "name VARCHAR(70) NOT NULL, " +
+                "sku VARCHAR(16), " +
                 "description TEXT, " +
+                "qty INTEGER NOT NULL, " +
                 "price REAL NOT NULL, " +
                 "category_id INTEGER, " +
                 "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +

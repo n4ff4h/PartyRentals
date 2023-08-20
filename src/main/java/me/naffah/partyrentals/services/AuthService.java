@@ -25,6 +25,8 @@ public class AuthService {
             } else {
                 System.out.println("User credentials incorrect!");
             }
+
+            conn.close();
         } catch (SQLException e) {
             logException("Error when creating tables", e);
         }

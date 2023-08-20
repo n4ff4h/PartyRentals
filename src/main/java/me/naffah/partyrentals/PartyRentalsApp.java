@@ -8,6 +8,7 @@ import me.naffah.partyrentals.services.DBService;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class PartyRentalsApp extends Application {
     @Override
@@ -19,10 +20,11 @@ public class PartyRentalsApp extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         DBService dbService = new DBService();
         Connection conn = dbService.connect();
         dbService.createTables(conn);
+        conn.close();
 
         launch(args);
     }
