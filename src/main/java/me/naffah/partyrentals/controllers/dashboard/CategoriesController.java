@@ -53,6 +53,12 @@ public class CategoriesController implements Initializable {
         createdDate.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
         modifiedDate.setCellValueFactory(new PropertyValueFactory<>("modifiedDate"));
         categoriesTable.setItems(categoryObservableList);
+
+        // Update fields with the selected row data
+        categoriesTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            nameField.setText(newSelection.getName());
+            rentalRateField.setText(String.valueOf(newSelection.getRentalRate()));
+        });
     }
 
     private final ObservableList<Category> categoryObservableList = FXCollections.observableArrayList();
