@@ -76,6 +76,8 @@ public class CategoriesController implements Initializable {
     }
 
     public void onUpdateButtonClick() throws SQLException {
+        if (selectedCategory == null) return;
+
         String name = nameField.getText();
         double rentalRate = Double.parseDouble(rentalRateField.getText());
 
@@ -90,5 +92,17 @@ public class CategoriesController implements Initializable {
 
         int index = categoryObservableList.indexOf(selectedCategory);
         categoryObservableList.set(index, categoryToUpdate);
+    }
+
+    public void onDeleteButtonClick() throws SQLException {
+        if (selectedCategory == null) return;
+
+        // Delete category from db
+        Category categoryToDelete = selectedCategory;
+        CategoriesService categoriesService = new CategoriesService();
+        categoriesService.delete(categoryToDelete.getId());
+
+        // Remove from TableView
+        categoryObservableList.remove(categoryToDelete);
     }
 }

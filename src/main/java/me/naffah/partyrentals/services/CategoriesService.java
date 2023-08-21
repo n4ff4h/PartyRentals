@@ -60,4 +60,12 @@ public class CategoriesService {
         ps.execute();
         conn.close();
     }
+
+    public void delete(int id) throws SQLException {
+        Connection conn = new DBService().connect();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM categories WHERE id=?");
+        ps.setInt(1, id);
+        ps.execute();
+        conn.close();
+    }
 }
