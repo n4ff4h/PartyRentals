@@ -54,7 +54,7 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                 <Button mnemonicParsing="false" text="Add" onAction="#onAddButtonClick" />
-                  <Button mnemonicParsing="false" text="Update" />
+                  <Button mnemonicParsing="false" text="Update" onAction="#onUpdateButtonClick" />
                   <Button mnemonicParsing="false" text="Delete" />
               </buttons>
                <VBox.margin>

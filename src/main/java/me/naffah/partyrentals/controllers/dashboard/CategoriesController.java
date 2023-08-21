@@ -2,7 +2,6 @@ package me.naffah.partyrentals.controllers.dashboard;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,9 +28,6 @@ public class CategoriesController implements Initializable {
     public TableColumn<Category, Date> createdDate;
     public TableColumn<Category, Date> modifiedDate;
 
-    public CategoriesController() throws SQLException {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CategoriesService categoriesService = new CategoriesService();
@@ -56,11 +52,14 @@ public class CategoriesController implements Initializable {
 
         // Update fields with the selected row data
         categoriesTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedCategory = newSelection;  // Save selected category to variable
             nameField.setText(newSelection.getName());
             rentalRateField.setText(String.valueOf(newSelection.getRentalRate()));
         });
     }
 
+    private Category selectedCategory = null;
+    // This holds the table data
     private final ObservableList<Category> categoryObservableList = FXCollections.observableArrayList();
 
     public void onAddButtonClick() throws SQLException {
@@ -74,5 +73,22 @@ public class CategoriesController implements Initializable {
         // Get last category from db and update TableView
         Category lastCategory = categoriesService.get("last").get(0);
         categoryObservableList.add(lastCategory);
+    }
+
+    public void onUpdateButtonClick() throws SQLException {
+        String name = nameField.getText();
+        double rentalRate = Double.parseDouble(rentalRateField.getText());
+
+        // Update object
+        Category categoryToUpdate = selectedCategory;
+        categoryToUpdate.setName(name);
+        categoryToUpdate.setRentalRate(rentalRate);
+
+        // Update record in db
+        CategoriesService categoriesService = new CategoriesService();
+        categoriesService.update(categoryToUpdate);
+
+        int index = categoryObservableList.indexOf(selectedCategory);
+        categoryObservableList.set(index, categoryToUpdate);
     }
 }
