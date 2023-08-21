@@ -38,7 +38,7 @@ public class CategoriesController implements Initializable {
         ArrayList<Category> categories = new ArrayList<>();
 
         try {
-            categories = categoriesService.get();
+            categories = categoriesService.get("all");
             System.out.println(categories.isEmpty());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -61,7 +61,12 @@ public class CategoriesController implements Initializable {
         String name = nameField.getText();
         double rentalRate = Double.parseDouble(rentalRateField.getText());
 
+        // Add to db
         CategoriesService categoriesService = new CategoriesService();
         categoriesService.add(new Category(name, rentalRate));
+
+        // Get last category from db and update TableView
+        Category lastCategory = categoriesService.get("last").get(0);
+        categoryObservableList.add(lastCategory);
     }
 }

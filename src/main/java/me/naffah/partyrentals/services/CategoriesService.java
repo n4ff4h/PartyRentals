@@ -19,11 +19,20 @@ public class CategoriesService {
         conn.close();
     }
 
-    public ArrayList<Category> get() throws SQLException {
+    public ArrayList<Category> get(String fetchLocation) throws SQLException {
         ArrayList<Category> categoryArrayList = new ArrayList<>();
 
         Connection conn = new DBService().connect();
-        PreparedStatement ps = conn.prepareStatement("SELECT * FROM categories");
+        PreparedStatement ps = null;
+
+        switch (fetchLocation) {
+            case "all" -> ps = conn.prepareStatement("SELECT * FROM categories");
+            case "last" -> ps = conn.prepareStatement("SELECT * FROM categories ORDER BY id DESC LIMIT 1;");
+            default -> {
+            }
+        }
+
+        assert ps != null;
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
