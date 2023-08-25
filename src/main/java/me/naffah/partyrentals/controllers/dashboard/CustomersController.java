@@ -93,7 +93,44 @@ public class CustomersController implements Initializable {
             Customer lastCustomer = customersService.get("last").get(0);
             customerObservableList.add(lastCustomer);
         } else {
-            // Display error
+            // TODO: Display error
         }
+    }
+
+    public void onUpdateButtonClick() throws SQLException {
+        if (selectedCustomer == null) return;
+
+        String fullName = fullNameField.getText();
+        String address = addressField.getText();
+        String email = emailField.getText();
+        String phone = phoneField.getText();
+        String type = (String) typeCombobox.getValue();
+
+        // Update object
+        Customer customerToUpdate = selectedCustomer;
+        customerToUpdate.setFullName(fullName);
+        customerToUpdate.setAddress(address);
+        customerToUpdate.setEmail(email);
+        customerToUpdate.setPhone(phone);
+        customerToUpdate.setType(type);
+
+        // Update record in db
+        CustomersService customersService = new CustomersService();
+        customersService.update(customerToUpdate);
+
+        int index = customerObservableList.indexOf(selectedCustomer);
+        customerObservableList.set(index, customerToUpdate);
+    }
+
+    public void onDeleteButtonClick() throws SQLException {
+        if (selectedCustomer == null) return;
+
+        // Delete category from db
+        Customer customerToDelete = selectedCustomer;
+        CustomersService customersService = new CustomersService();
+        customersService.delete(customerToDelete.getId());
+
+        // Remove from TableView
+        customerObservableList.remove(customerToDelete);
     }
 }

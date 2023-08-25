@@ -56,4 +56,25 @@ public class CustomersService {
         ps.execute();
         conn.close();
     }
+
+    public void update(Customer customer) throws SQLException {
+        Connection conn = new DBService().connect();
+        PreparedStatement ps = conn.prepareStatement("UPDATE customers SET fullName=?, address=?, email=?, phone=?, type=? WHERE id=?");
+        ps.setString(1, customer.getFullName());
+        ps.setString(2, customer.getAddress());
+        ps.setString(3, customer.getEmail());
+        ps.setString(4, customer.getPhone());
+        ps.setString(5, customer.getType());
+        ps.setInt(6, customer.getId());
+        ps.execute();
+        conn.close();
+    }
+
+    public void delete(int id) throws SQLException {
+        Connection conn = new DBService().connect();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM customers WHERE id=?");
+        ps.setInt(1, id);
+        ps.execute();
+        conn.close();
+    }
 }

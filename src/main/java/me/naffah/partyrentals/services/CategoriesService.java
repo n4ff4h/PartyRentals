@@ -56,7 +56,7 @@ public class CategoriesService {
         PreparedStatement ps = conn.prepareStatement("UPDATE categories SET name=?, rentalRate=? WHERE id=?");
         ps.setString(1, category.getName());
         ps.setDouble(2, category.getRentalRate());
-        ps.setInt(2, category.getId());
+        ps.setInt(3, category.getId());
         ps.execute();
         conn.close();
     }
