@@ -96,25 +96,64 @@ public class ProductsController implements Initializable {
     private final ObservableList<Product> productObservableList = FXCollections.observableArrayList();
 
     public void onAddButtonClick(ActionEvent event) throws SQLException {
-//        String name = nameField.getText();
-//        String sku = skuField.getText();
-//        String description = descriptionArea.getText();
-//        Double price = Double.valueOf(priceField.getText());
-//        int qty = Integer.parseInt(qtyField.getText());
-//
-//
-//        // Add to db
-//        CategoriesService categoriesService = new CategoriesService();
-//        categoriesService.add(new Category(name, rentalRate));
-//
-//        // Get last category from db and update TableView
-//        Category lastCategory = categoriesService.get("last").get(0);
-//        categoryObservableList.add(lastCategory);
+        Category category = categoryCombobox.getValue();
+
+        if (category != null) {
+            String name = nameField.getText();
+            String sku = skuField.getText();
+            String description = descriptionArea.getText();
+            double price = Double.parseDouble(priceField.getText());
+            int qty = Integer.parseInt(qtyField.getText());
+
+            // Add to db
+            ProductService productService = new ProductService();
+            productService.add(new Product(name, sku, description, price, qty, category.getId()));
+
+            // Get last category from db and update TableView
+            Product lastProduct = productService.get("last").get(0);
+            productObservableList.add(lastProduct);
+        } else {
+            // TODO: Handle error message
+        }
+
     }
 
-    public void onUpdateButtonClick(ActionEvent event) {
+    public void onUpdateButtonClick(ActionEvent event) throws SQLException {
+        if (selectedProduct == null) return;
+
+        String name = nameField.getText();
+        String sku = skuField.getText();
+        String description = descriptionArea.getText();
+        double price = Double.parseDouble(priceField.getText());
+        int qty = Integer.parseInt(qtyField.getText());
+        Category category = categoryCombobox.getValue();
+
+        // Update object
+        Product productToUpdate = selectedProduct;
+        productToUpdate.setName(name);
+        productToUpdate.setSku(sku);
+        productToUpdate.setDescription(description);
+        productToUpdate.setPrice(price);
+        productToUpdate.setQty(qty);
+        productToUpdate.setCategoryId(category.getId());
+
+        // Update record in db
+        ProductService productService = new ProductService();
+        productService.update(productToUpdate);
+
+        int index = productObservableList.indexOf(selectedProduct);
+        productObservableList.set(index, productToUpdate);
     }
 
-    public void onDeleteButtonClick(ActionEvent event) {
+    public void onDeleteButtonClick(ActionEvent event) throws SQLException {
+        if (selectedProduct == null) return;
+
+        // Delete category from db
+        Product productToDelete = selectedProduct;
+        ProductService productService = new ProductService();
+        productService.delete(productToDelete.getId());
+
+        // Remove from TableView
+        productObservableList.remove(productToDelete);
     }
 }

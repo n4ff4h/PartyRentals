@@ -1,4 +1,5 @@
 package me.naffah.partyrentals.services;
+import me.naffah.partyrentals.models.Category;
 import me.naffah.partyrentals.models.Product;
 
 import java.sql.Connection;
@@ -42,5 +43,40 @@ public class ProductService {
         conn.close();
 
         return productArrayList;
+    }
+
+    public void add(Product product) throws SQLException {
+        Connection conn = new DBService().connect();
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO products (name, sku, description, price, qty, category_id) VALUES (?, ?, ?, ?, ?, ?)");
+        ps.setString(1, product.getName());
+        ps.setString(2, product.getSku());
+        ps.setString(3, product.getDescription());
+        ps.setDouble(4, product.getPrice());
+        ps.setInt(5, product.getQty());
+        ps.setInt(6, product.getCategoryId());
+        ps.execute();
+        conn.close();
+    }
+
+    public void update(Product product) throws SQLException {
+        Connection conn = new DBService().connect();
+        PreparedStatement ps = conn.prepareStatement("UPDATE products SET name=?, sku=?, description=?, price=?, qty=?, category_id=? WHERE id=?");
+        ps.setString(1, product.getName());
+        ps.setString(2, product.getSku());
+        ps.setString(3, product.getDescription());
+        ps.setDouble(4, product.getPrice());
+        ps.setInt(5, product.getQty());
+        ps.setInt(6, product.getCategoryId());
+        ps.setInt(7, product.getId());
+        ps.execute();
+        conn.close();
+    }
+
+    public void delete(int id) throws SQLException {
+        Connection conn = new DBService().connect();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM products WHERE id=?");
+        ps.setInt(1, id);
+        ps.execute();
+        conn.close();
     }
 }

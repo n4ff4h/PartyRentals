@@ -13,12 +13,12 @@ public class Product {
     private Date createdDate;
     private Date modifiedDate;
 
-    public Product(String name, String sku, String description, int qty, double price, int categoryId) {
+    public Product(String name, String sku, String description, double price, int qty, int categoryId) {
         this.name = name;
         this.sku = sku;
         this.description = description;
-        this.qty = qty;
         this.price = price;
+        this.qty = qty;
         this.categoryId = categoryId;
     }
 
