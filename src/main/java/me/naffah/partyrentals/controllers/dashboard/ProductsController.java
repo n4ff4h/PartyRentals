@@ -1,12 +1,21 @@
 package me.naffah.partyrentals.controllers.dashboard;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import me.naffah.partyrentals.models.Category;
 import me.naffah.partyrentals.models.Product;
+import me.naffah.partyrentals.services.CategoriesService;
+import me.naffah.partyrentals.services.ProductService;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ProductsController implements Initializable {
@@ -14,7 +23,7 @@ public class ProductsController implements Initializable {
     public TextField priceField;
     public TextField skuField;
     public TextField qtyField;
-    public ComboBox<String> categoryCombobox;
+    public ComboBox<Category> categoryCombobox;
     public TextArea descriptionArea;
     public TableView<Product> productsTable;
     public TableColumn<Product, Integer> idCol;
@@ -28,10 +37,79 @@ public class ProductsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ProductService productService = new ProductService();
+        CategoriesService categoriesService = new CategoriesService();
 
+        try {
+            ArrayList<Product> products = productService.get("all");
+            productObservableList.addAll(products);
+
+            ArrayList<Category> categories = categoriesService.get("all");
+            categoryObservableList.addAll(categories);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        //make sure the property value factory should be exactly same as the e.g getId from your model class
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        skuCol.setCellValueFactory(new PropertyValueFactory<>("sku"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
+        createdDateCol.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
+        modifiedDateCol.setCellValueFactory(new PropertyValueFactory<>("modifiedDate"));
+        productsTable.setItems(productObservableList);
+
+        Callback<ListView<Category>, ListCell<Category>> cellFactory = lv -> new ListCell<Category>() {
+            @Override
+            protected void updateItem(Category item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+        };
+        categoryCombobox.setButtonCell(cellFactory.call(null));
+        categoryCombobox.setCellFactory(cellFactory);
+        categoryCombobox.setItems(categoryObservableList);
+
+
+        // Update fields with the selected row data
+        productsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedProduct = newSelection;  // Save selected category to variable
+            nameField.setText(newSelection.getName());
+            skuField.setText(newSelection.getSku());
+            descriptionArea.setText(newSelection.getDescription());
+            priceField.setText(String.valueOf(newSelection.getPrice()));
+            qtyField.setText(String.valueOf(newSelection.getQty()));
+
+            Category selectedCategory = categoryObservableList.stream()
+                            .filter(category -> category.getId() == newSelection.getCategoryId())
+                            .findFirst()
+                            .orElse(null);
+            categoryCombobox.setValue(selectedCategory);
+        });
     }
 
-    public void onAddButtonClick(ActionEvent event) {
+    private final ObservableList<Category> categoryObservableList = FXCollections.observableArrayList();
+    private Product selectedProduct = null;
+    // This holds the table data
+    private final ObservableList<Product> productObservableList = FXCollections.observableArrayList();
+
+    public void onAddButtonClick(ActionEvent event) throws SQLException {
+//        String name = nameField.getText();
+//        String sku = skuField.getText();
+//        String description = descriptionArea.getText();
+//        Double price = Double.valueOf(priceField.getText());
+//        int qty = Integer.parseInt(qtyField.getText());
+//
+//
+//        // Add to db
+//        CategoriesService categoriesService = new CategoriesService();
+//        categoriesService.add(new Category(name, rentalRate));
+//
+//        // Get last category from db and update TableView
+//        Category lastCategory = categoriesService.get("last").get(0);
+//        categoryObservableList.add(lastCategory);
     }
 
     public void onUpdateButtonClick(ActionEvent event) {
