@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class CustomersController implements Initializable {
     public TextField fullNameField;
-    public ComboBox typeCombobox;
+    public ComboBox<String> typeCombobox;
     public TextField phoneField;
     public TextField addressField;
     public TextField emailField;

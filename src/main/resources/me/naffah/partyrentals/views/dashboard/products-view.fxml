@@ -49,7 +49,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Name" />
-                        <TextField />
+                        <TextField fx:id="nameField" />
                      </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -57,7 +57,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="Price" />
-                        <TextField />
+                        <TextField fx:id="priceField" />
                      </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -66,7 +66,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
                         <Label text="SKU" />
-                        <TextField />
+                        <TextField fx:id="skuField" />
                      </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -75,13 +75,13 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                      <children>
                         <Label text="Category" />
-                        <ComboBox prefWidth="150.0" promptText="Select category" />
+                        <ComboBox fx:id="categoryCombobox" prefWidth="150.0" promptText="Select category" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label text="QTY" />
-                        <TextField />
+                        <TextField fx:id="qtyField" />
                      </children>
                   </VBox>
                </children>
@@ -92,7 +92,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Description" />
-                  <TextArea prefHeight="200.0" prefWidth="200.0" />
+                  <TextArea fx:id="descriptionArea" prefHeight="200.0" prefWidth="200.0" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
@@ -100,27 +100,27 @@
             </VBox>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Add" />
-                  <Button mnemonicParsing="false" text="Update" />
-                  <Button mnemonicParsing="false" text="Delete" />
+                <Button mnemonicParsing="false" text="Add" onAction="#onAddButtonClick" />
+                  <Button mnemonicParsing="false" text="Update" onAction="#onUpdateButtonClick" />
+                  <Button mnemonicParsing="false" text="Delete" onAction="#onDeleteButtonClick" />
               </buttons>
                <VBox.margin>
                   <Insets bottom="10.0" right="10.0" />
                </VBox.margin>
             </ButtonBar>
-            <TableView prefHeight="212.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="productsTable" prefHeight="212.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
               <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="132.0" text="NAME" />
-                  <TableColumn prefWidth="144.0" text="SKU" />
-                  <TableColumn prefWidth="75.0" text="QTY" />
-                  <TableColumn prefWidth="75.0" text="PRICE" />
-                  <TableColumn prefWidth="75.0" text="CATEGORY" />
-                  <TableColumn prefWidth="126.0" text="CREATE DATE" />
-                  <TableColumn prefWidth="122.0" text="MODIFIED DATE" />
+                <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="nameCol" prefWidth="132.0" text="NAME" />
+                  <TableColumn fx:id="skuCol" prefWidth="144.0" text="SKU" />
+                  <TableColumn fx:id="qtyCol" prefWidth="75.0" text="QTY" />
+                  <TableColumn fx:id="priceCol" prefWidth="75.0" text="PRICE" />
+                  <TableColumn fx:id="categoryCol" prefWidth="75.0" text="CATEGORY" />
+                  <TableColumn fx:id="createdDateCol" prefWidth="126.0" text="CREATE DATE" />
+                  <TableColumn fx:id="modifiedDateCol" prefWidth="122.0" text="MODIFIED DATE" />
               </columns>
                <opaqueInsets>
                   <Insets />
