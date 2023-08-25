@@ -75,7 +75,7 @@ public class ProductsController implements Initializable {
 
         // Update fields with the selected row data
         productsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            selectedProduct = newSelection;  // Save selected category to variable
+            selectedProduct = newSelection;  // Save selected product to variable
             nameField.setText(newSelection.getName());
             skuField.setText(newSelection.getSku());
             descriptionArea.setText(newSelection.getDescription());
