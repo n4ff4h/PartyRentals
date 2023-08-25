@@ -37,7 +37,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Full Name" />
-                        <TextField />
+                        <TextField fx:id="fullNameField" />
                      </children>
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -45,13 +45,13 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                      <children>
                         <Label text="Type" />
-                        <ComboBox prefHeight="26.0" prefWidth="162.0" promptText="Select customer type" />
+                        <ComboBox fx:id="typeCombobox" prefHeight="26.0" prefWidth="162.0" promptText="Select customer type" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="Email" />
-                        <TextField>
+                        <TextField fx:id="emailField">
                            <VBox.margin>
                               <Insets right="10.0" />
                            </VBox.margin></TextField>
@@ -60,13 +60,13 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label text="Phone" />
-                        <TextField />
+                        <TextField fx:id="phoneField" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
                         <Label text="Address" />
-                        <TextField />
+                        <TextField fx:id="addressField" />
                      </children>
                   </VBox>
                </children>
@@ -76,7 +76,7 @@
             </GridPane>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Add" />
+                <Button mnemonicParsing="false" text="Add" onAction="#onAddButtonClick" />
                   <Button mnemonicParsing="false" text="Update" />
                   <Button mnemonicParsing="false" text="Delete" />
               </buttons>
@@ -84,19 +84,19 @@
                   <Insets bottom="10.0" right="10.0" />
                </VBox.margin>
             </ButtonBar>
-            <TableView prefHeight="212.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="customersTable" prefHeight="212.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
               <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="132.0" text="FULL NAME" />
-                  <TableColumn prefWidth="144.0" text="ADDRESS" />
-                  <TableColumn prefWidth="126.0" text="EMAIL" />
-                  <TableColumn prefWidth="122.0" text="PHONE" />
-                  <TableColumn prefWidth="75.0" text="TYPE" />
-                  <TableColumn prefWidth="75.0" text="CREATED DATE" />
-                  <TableColumn prefWidth="75.0" text="MODIFIED DATE" />
+                <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="fullNameCol" prefWidth="132.0" text="FULL NAME" />
+                  <TableColumn fx:id="addressCol" prefWidth="144.0" text="ADDRESS" />
+                  <TableColumn fx:id="emailCol" prefWidth="126.0" text="EMAIL" />
+                  <TableColumn fx:id="phoneCol" prefWidth="122.0" text="PHONE" />
+                  <TableColumn fx:id="typeCol" prefWidth="75.0" text="TYPE" />
+                  <TableColumn fx:id="createdDateCol" prefWidth="75.0" text="CREATED DATE" />
+                  <TableColumn fx:id="modifiedDateCol" prefWidth="75.0" text="MODIFIED DATE" />
               </columns>
                <opaqueInsets>
                   <Insets />

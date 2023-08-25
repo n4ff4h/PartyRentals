@@ -36,5 +36,15 @@ public class CreateTableStatements {
                 "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE SET NULL)");
+
+        put("customers", "CREATE TABLE IF NOT EXISTS customers " +
+                "(id INTEGER PRIMARY KEY NOT NULL, " +
+                "fullName VARCHAR(50) NOT NULL, " +
+                "address VARCHAR(120) NOT NULL, " +
+                "email VARCHAR(320) UNIQUE, " +
+                "phone VARCHAR(15) NOT NULL, " +
+                "type VARCHAR(30) NOT NULL, " +
+                "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
     }};
 }

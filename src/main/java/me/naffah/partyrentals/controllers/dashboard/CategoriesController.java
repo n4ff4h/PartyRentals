@@ -22,32 +22,30 @@ public class CategoriesController implements Initializable {
     public TextField nameField;
     public TextField rentalRateField;
     public TableView<Category> categoriesTable;
-    public TableColumn<Category, Integer> id;
-    public TableColumn<Category, String> name;
-    public TableColumn<Category, Double> rentalRate;
-    public TableColumn<Category, Date> createdDate;
-    public TableColumn<Category, Date> modifiedDate;
+    public TableColumn<Category, Integer> idCol;
+    public TableColumn<Category, String> nameCol;
+    public TableColumn<Category, Double> rentalRateCol;
+    public TableColumn<Category, Date> createdDateCol;
+    public TableColumn<Category, Date> modifiedDateCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CategoriesService categoriesService = new CategoriesService();
-        ArrayList<Category> categories = new ArrayList<>();
+        ArrayList<Category> categories;
 
         try {
             categories = categoriesService.get("all");
-            System.out.println(categories.isEmpty());
+             categoryObservableList.addAll(categories);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        categoryObservableList.addAll(categories);
-
         //make sure the property value factory should be exactly same as the e.g getId from your model class
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        rentalRate.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
-        createdDate.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
-        modifiedDate.setCellValueFactory(new PropertyValueFactory<>("modifiedDate"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        rentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
+        createdDateCol.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
+        modifiedDateCol.setCellValueFactory(new PropertyValueFactory<>("modifiedDate"));
         categoriesTable.setItems(categoryObservableList);
 
         // Update fields with the selected row data
