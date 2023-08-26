@@ -5,7 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import me.naffah.partyrentals.models.Customer;
 import me.naffah.partyrentals.models.Product;
+import me.naffah.partyrentals.services.CustomersService;
 import me.naffah.partyrentals.services.ProductService;
 
 import java.net.URL;
@@ -26,21 +29,24 @@ public class RentalController implements Initializable {
     public TableColumn<Product, Integer> categoryCol;
     public Button addToCartButton;
     public TextField itemAmountButton;
-    public TextField customerIdField;
-    public ListView<String> saleOverviewListView;
     public TextField paidAmountField;
     public ComboBox<String> paymentMethodComboBox;
     public Button makeSaleButton;
+    public ComboBox<Customer> customerCombobox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startDateField.setValue(LocalDate.now());
         endDateField.setValue(LocalDate.now());
         ProductService productService = new ProductService();
+        CustomersService customersService = new CustomersService();
 
         try {
             ArrayList<Product> products = productService.get("all");
             productObservableList.addAll(products);
+
+            ArrayList<Customer> customers = customersService.get("all");
+            customerObservableList.addAll(customers);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -58,6 +64,18 @@ public class RentalController implements Initializable {
             selectedProduct = newSelection;  // Save selected product to variable
         });
 
+        // populate customers combobox
+        Callback<ListView<Customer>, ListCell<Customer>> cellFactory = lv -> new ListCell<Customer>() {
+            @Override
+            protected void updateItem(Customer item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getFullName());
+            }
+        };
+        customerCombobox.setButtonCell(cellFactory.call(null));
+        customerCombobox.setCellFactory(cellFactory);
+        customerCombobox.setItems(customerObservableList);
+
         paymentMethodComboBox.setItems(FXCollections.observableArrayList(
                 "Cash",
                 "Card",
@@ -68,9 +86,14 @@ public class RentalController implements Initializable {
     private Product selectedProduct = null;
     // This holds the table data
     private final ObservableList<Product> productObservableList = FXCollections.observableArrayList();
+    private final ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
 
     public void onAddtoCartButtonClick() {
-        Product product = selectedProduct;
-        saleOverviewListView.setItems(FXCollections.observableArrayList("hello", "hello2"));
+        Customer customer = customerCombobox.getValue();
+        if (customer != null) {
+
+        } else {
+            // TODO: Display error
+        }
     }
 }

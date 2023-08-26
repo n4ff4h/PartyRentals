@@ -30,8 +30,8 @@ public class CreateTableStatements {
                 "name VARCHAR(70) NOT NULL, " +
                 "sku VARCHAR(16), " +
                 "description TEXT, " +
-                "qty INTEGER NOT NULL, " +
                 "price REAL NOT NULL, " +
+                "qty INTEGER NOT NULL, " +
                 "category_id INTEGER, " +
                 "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +

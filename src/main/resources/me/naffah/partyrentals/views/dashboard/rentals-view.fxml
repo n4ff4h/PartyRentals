@@ -66,8 +66,8 @@
                       <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="nameCol" prefWidth="75.0" text="NAME" />
                         <TableColumn fx:id="skuCol" prefWidth="75.0" text="SKU" />
-                        <TableColumn fx:id="qtyCol" prefWidth="75.0" text="QTY" />
                         <TableColumn fx:id="priceCol" prefWidth="75.0" text="PRICE" />
+                        <TableColumn fx:id="qtyCol" prefWidth="75.0" text="QTY" />
                         <TableColumn fx:id="categoryCol" prefWidth="75.0" text="CATEGORY" />
                     </columns>
                      <VBox.margin>
@@ -101,7 +101,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ComboBox prefWidth="150.0" promptText="Select Customer" />
+                        <ComboBox fx:id="customerCombobox" prefWidth="150.0" promptText="Select Customer" />
                         <Button mnemonicParsing="false" text="Remove Item" GridPane.columnIndex="1" />
                      </children>
                      <VBox.margin>

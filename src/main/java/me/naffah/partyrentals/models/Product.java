@@ -7,8 +7,8 @@ public class Product {
     private String name;
     private String sku;
     private String description;
-    private int qty;
     private double price;
+    private int qty;
     private int categoryId;
     private Date createdDate;
     private Date modifiedDate;

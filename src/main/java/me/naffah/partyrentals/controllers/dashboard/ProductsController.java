@@ -29,8 +29,8 @@ public class ProductsController implements Initializable {
     public TableColumn<Product, Integer> idCol;
     public TableColumn<Product, String> nameCol;
     public TableColumn<Product, String> skuCol;
-    public TableColumn<Product, Integer> qtyCol;
     public TableColumn<Product, Double> priceCol;
+    public TableColumn<Product, Integer> qtyCol;
     public TableColumn<Product, Integer> categoryCol;
     public TableColumn<Product, Date> createdDateCol;
     public TableColumn<Product, Date> modifiedDateCol;
