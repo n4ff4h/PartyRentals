@@ -119,6 +119,12 @@ public class RentalController implements Initializable {
         System.out.println(itemAmount);
 
         if (customer != null && itemAmount != null) {
+            // Prevent users from selecting more products than available
+            if (Integer.parseInt(itemAmount) > selectedProduct.getQty()) {
+                // TODO: Show error dialog
+                return;
+            }
+
             // Get product data
             int id = selectedProduct.getId();
             String name = selectedProduct.getName();
