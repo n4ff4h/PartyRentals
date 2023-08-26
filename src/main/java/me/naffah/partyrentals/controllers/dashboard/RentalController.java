@@ -68,4 +68,9 @@ public class RentalController implements Initializable {
     private Product selectedProduct = null;
     // This holds the table data
     private final ObservableList<Product> productObservableList = FXCollections.observableArrayList();
+
+    public void onAddtoCartButtonClick() {
+        Product product = selectedProduct;
+        saleOverviewListView.setItems(FXCollections.observableArrayList("hello", "hello2"));
+    }
 }
