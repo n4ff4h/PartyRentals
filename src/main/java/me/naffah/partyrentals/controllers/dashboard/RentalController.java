@@ -120,12 +120,11 @@ public class RentalController implements Initializable {
 
         if (customer != null && itemAmount != null) {
             // Get product data
-            Product product = selectedProduct;
-            int id = product.getId();
-            String name = product.getName();
+            int id = selectedProduct.getId();
+            String name = selectedProduct.getName();
             String item = id + " - " + name;
-            int qty = Integer.parseInt(itemAmount);
-            double price = product.getPrice();
+            int itemQty = Integer.parseInt(itemAmount);
+            double price = selectedProduct.getPrice();
             double taxRate = 0.06;
 
             LocalDate currentDate = LocalDate.now();
@@ -141,7 +140,7 @@ public class RentalController implements Initializable {
             }
 
             // Calculate the total price before tax
-            double totalPrice = price * qty;
+            double totalPrice = price * itemQty;
 
             // Calculate tax amount
             double taxAmount = totalPrice * taxRate;
@@ -149,8 +148,14 @@ public class RentalController implements Initializable {
             // Calculate the final total price including tax
             double finalTotalPrice = totalPrice + taxAmount;
 
-            CartItem cartItem = new CartItem(item, qty, price, taxAmount, finalTotalPrice, product);
+            CartItem cartItem = new CartItem(item, itemQty, price, taxAmount, finalTotalPrice, selectedProduct);
             cartItemObservableList.add(cartItem);
+
+            // Deduct qty from product in products table in rental view
+            int index = productObservableList.indexOf(selectedProduct);
+            int qty = selectedProduct.getQty();
+            selectedProduct.setQty(qty - itemQty);
+            productObservableList.set(index, selectedProduct);
         } else {
             // TODO: Display error
         }
