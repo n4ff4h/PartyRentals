@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import me.naffah.partyrentals.models.CartItem;
 import me.naffah.partyrentals.models.Customer;
 import me.naffah.partyrentals.models.Product;
 import me.naffah.partyrentals.services.CustomersService;
@@ -13,8 +14,11 @@ import me.naffah.partyrentals.services.ProductService;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RentalController implements Initializable {
@@ -28,11 +32,17 @@ public class RentalController implements Initializable {
     public TableColumn<Product, Double> priceCol;
     public TableColumn<Product, Integer> categoryCol;
     public Button addToCartButton;
-    public TextField itemAmountButton;
+    public TextField itemAmountField;
     public TextField paidAmountField;
     public ComboBox<String> paymentMethodComboBox;
     public Button makeSaleButton;
     public ComboBox<Customer> customerCombobox;
+    public TableView<CartItem> cartItemsTable;
+    public TableColumn<CartItem, String> iItemCol;
+    public TableColumn<CartItem, Integer> iQtyCol;
+    public TableColumn<CartItem, Double> iPriceCol;
+    public TableColumn<CartItem, Double> iTaxCol;
+    public TableColumn<CartItem, Double> iTotalCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,6 +74,17 @@ public class RentalController implements Initializable {
             selectedProduct = newSelection;  // Save selected product to variable
         });
 
+        iItemCol.setCellValueFactory(new PropertyValueFactory<>("item"));
+        iQtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        iPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        iTaxCol.setCellValueFactory(new PropertyValueFactory<>("tax"));
+        iTotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+        cartItemsTable.setItems(cartItemObservableList);
+
+        cartItemsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedCartItem = newSelection;  // Save selected product to variable
+        });
+
         // populate customers combobox
         Callback<ListView<Customer>, ListCell<Customer>> cellFactory = lv -> new ListCell<Customer>() {
             @Override
@@ -87,11 +108,49 @@ public class RentalController implements Initializable {
     // This holds the table data
     private final ObservableList<Product> productObservableList = FXCollections.observableArrayList();
     private final ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
+    private CartItem selectedCartItem = null;
+    private final ObservableList<CartItem> cartItemObservableList = FXCollections.observableArrayList();
 
     public void onAddtoCartButtonClick() {
         Customer customer = customerCombobox.getValue();
-        if (customer != null) {
+        String itemAmount = itemAmountField.getText();
 
+        System.out.println(customer);
+        System.out.println(itemAmount);
+
+        if (customer != null && itemAmount != null) {
+            // Get product data
+            Product product = selectedProduct;
+            int id = product.getId();
+            String name = product.getName();
+            String item = id + " - " + name;
+            int qty = Integer.parseInt(itemAmount);
+            double price = product.getPrice();
+            double taxRate = 0.06;
+
+            LocalDate currentDate = LocalDate.now();
+            DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
+
+            if (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY) {
+                // Apply a 5% increase in price for weekends
+                price *= 1.05;
+            }
+
+            if (Objects.equals(customer.getType(), "Resort")) {
+                taxRate = 0.08; // 8% tax rate for resorts
+            }
+
+            // Calculate the total price before tax
+            double totalPrice = price * qty;
+
+            // Calculate tax amount
+            double taxAmount = totalPrice * taxRate;
+
+            // Calculate the final total price including tax
+            double finalTotalPrice = totalPrice + taxAmount;
+
+            CartItem cartItem = new CartItem(item, qty, price, taxAmount, finalTotalPrice, product);
+            cartItemObservableList.add(cartItem);
         } else {
             // TODO: Display error
         }

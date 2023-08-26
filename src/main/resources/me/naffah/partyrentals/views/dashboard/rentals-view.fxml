@@ -80,7 +80,7 @@
                   <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
                       <Button fx:id="addToCartButton" mnemonicParsing="false" onAction="#onAddtoCartButtonClick" text="Add to Cart" />
-                        <TextField fx:id="itemAmountButton" promptText="Item amount" />
+                        <TextField fx:id="itemAmountField" promptText="Item amount" />
                     </buttons>
                      <VBox.margin>
                         <Insets bottom="24.0" left="10.0" right="10.0" />
@@ -108,13 +108,13 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </GridPane>
-                  <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="cartItemsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Item" />
-                      <TableColumn prefWidth="75.0" text="Qty" />
-                        <TableColumn prefWidth="75.0" text="Price" />
-                        <TableColumn prefWidth="75.0" text="Tax" />
-                        <TableColumn prefWidth="75.0" text="Total" />
+                      <TableColumn fx:id="iItemCol" prefWidth="75.0" text="Item" />
+                      <TableColumn fx:id="iQtyCol" prefWidth="75.0" text="Qty" />
+                        <TableColumn fx:id="iPriceCol" prefWidth="75.0" text="Price" />
+                        <TableColumn fx:id="iTaxCol" prefWidth="75.0" text="Tax" />
+                        <TableColumn fx:id="iTotalCol" prefWidth="75.0" text="Total" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
