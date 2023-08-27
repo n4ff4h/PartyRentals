@@ -16,7 +16,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -162,6 +161,26 @@ public class RentalController implements Initializable {
             int qty = selectedProduct.getQty();
             selectedProduct.setQty(qty - itemQty);
             productObservableList.set(index, selectedProduct);
+        } else {
+            // TODO: Display error
+        }
+    }
+
+    public void onRemoveItemButtonClick() {
+        if (selectedCartItem != null) {
+            Product product = selectedCartItem.getProduct();
+
+            for (Product value : productObservableList) {
+                if (value.getId() == product.getId()) {
+                    int index = productObservableList.indexOf(value);
+
+                    // Update product
+                    product.setQty(product.getQty() + selectedCartItem.getQty());
+                    productObservableList.set(index, product);
+                }
+            }
+
+            cartItemObservableList.remove(selectedCartItem);
         } else {
             // TODO: Display error
         }
