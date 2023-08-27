@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class PartyRentalsApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PartyRentalsApp.class.getResource("views/dashboard-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PartyRentalsApp.class.getResource("views/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), Double.MAX_VALUE, Double.MAX_VALUE);
         stage.setTitle("Party Rentals App");
         stage.setScene(scene);

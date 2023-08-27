@@ -11,12 +11,16 @@ import me.naffah.partyrentals.models.Customer;
 import me.naffah.partyrentals.models.Product;
 import me.naffah.partyrentals.services.CustomersService;
 import me.naffah.partyrentals.services.ProductService;
+import me.naffah.partyrentals.services.RentalService;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -42,6 +46,7 @@ public class RentalController implements Initializable {
     public TableColumn<CartItem, Double> iPriceCol;
     public TableColumn<CartItem, Double> iTaxCol;
     public TableColumn<CartItem, Double> iTotalCol;
+    public Label totalAmountText;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,6 +116,7 @@ public class RentalController implements Initializable {
     private final ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
     private CartItem selectedCartItem = null;
     private final ObservableList<CartItem> cartItemObservableList = FXCollections.observableArrayList();
+    private double totalAmount = 0;
 
     public void onAddtoCartButtonClick() {
         Customer customer = customerCombobox.getValue();
@@ -155,6 +161,19 @@ public class RentalController implements Initializable {
             // Calculate the final total price including tax
             double finalTotalPrice = totalPrice + taxAmount;
 
+            Date startDate = Date.valueOf(startDateField.getValue());
+            Date endDate = Date.valueOf(endDateField.getValue());
+
+            // Convert SQL Date objects to LocalDate
+            LocalDate localStartDate = startDate.toLocalDate();
+            LocalDate localEndDate = endDate.toLocalDate();
+
+            // Calculate duration between the two LocalDate objects
+            Duration duration = Duration.between(localStartDate.atStartOfDay(), localEndDate.atStartOfDay());
+            long days = duration.toDays();
+
+            totalAmount += finalTotalPrice * days;
+            totalAmountText.setText(String.valueOf(totalAmount));
             CartItem cartItem = new CartItem(item, itemQty, price, taxAmount, finalTotalPrice, selectedProduct);
             cartItemObservableList.add(cartItem);
 
@@ -186,6 +205,22 @@ public class RentalController implements Initializable {
             cartItemObservableList.remove(selectedCartItem);
         } else {
             // TODO: Display error
+        }
+    }
+
+    public void onMakeSaleButtonClick() throws SQLException {
+        double paidAmount = 0;
+        if (!Objects.equals(paidAmountField.getText(), "")) paidAmount = Double.parseDouble(paidAmountField.getText());
+
+        if (paidAmount > totalAmount) {
+            RentalService rentalService = new RentalService();
+            Customer customer = customerCombobox.getValue();
+            Date startDate = Date.valueOf(startDateField.getValue());
+            Date endDate = Date.valueOf(endDateField.getValue());
+            String paymentMethod = paymentMethodComboBox.getValue();
+            final ArrayList<CartItem> cartItemList = new ArrayList<>(cartItemObservableList);
+
+            rentalService.createRentalOrder(customer, startDate, endDate, paymentMethod, paidAmount, cartItemList);
         }
     }
 }
