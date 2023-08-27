@@ -60,6 +60,7 @@ public class RentalController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        // Products table
         //make sure the property value factory should be exactly same as the e.g getId from your model class
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -73,6 +74,7 @@ public class RentalController implements Initializable {
             selectedProduct = newSelection;  // Save selected product to variable
         });
 
+        // Cart items table
         iItemCol.setCellValueFactory(new PropertyValueFactory<>("item"));
         iQtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         iPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -167,6 +169,7 @@ public class RentalController implements Initializable {
     }
 
     public void onRemoveItemButtonClick() {
+        // Check if a cart item is selected
         if (selectedCartItem != null) {
             Product product = selectedCartItem.getProduct();
 

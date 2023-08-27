@@ -46,5 +46,32 @@ public class CreateTableStatements {
                 "type VARCHAR(30) NOT NULL, " +
                 "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+
+        put("orders", "CREATE TABLE IF NOT EXISTS orders " +
+                "(id INTEGER PRIMARY KEY NOT NULL, " +
+                "customerId INTEGER NOT NULL, " +
+                "paymentMethod VARCHAR(16) NOT NULL, " +
+                "paidAmount REAL NOT NULL, " +
+                "startDate TIMESTAMP NOT NULL, " +
+                "endDate TIMESTAMP NOT NULL, " +
+                "returnedDate TIMESTAMP, " +
+                "status VARCHAR(16) NOT NULL, " +
+                "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (customerId) REFERENCES customers (id) ON DELETE SET NULL)");
+
+        put("orderLines", "CREATE TABLE IF NOT EXISTS orderLines " +
+                "(id INTEGER PRIMARY KEY NOT NULL, " +
+                "orderId INTEGER NOT NULL, " +
+                "productId INTEGER NOT NULL, " +
+                "name VARCHAR(70) NOT NULL, " +
+                "sku VARCHAR(16), " +
+                "price REAL NOT NULL, " +
+                "qty INTEGER NOT NULL, " +
+                "taxAmount REAL NOT NULL, " +
+                "totalAmount REAL NOT NULL, " +
+                "createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "modifiedDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "FOREIGN KEY (orderId) REFERENCES orders (id) ON DELETE CASCADE)");
     }};
 }
